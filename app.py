@@ -155,6 +155,16 @@ def sua_nhan_vien(id):
         nhan_vien=nhan_vien
     )
 
+# Xoa nhan vien
+@app.route("/nhanvien/xoa/<int:id>", methods=["POST"])
+def xoa_nhan_vien(id):
+    nhan_vien = NhanVien.query.get_or_404(id)
+
+    db.session.delete(nhan_vien)
+    db.session.commit()
+
+    return redirect(url_for("danh_sach_nhan_vien"))
+
 # Tao cac bang trong database neu chua ton tai
 with app.app_context():
     db.create_all()

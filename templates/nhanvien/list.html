@@ -55,6 +55,14 @@
                     <a href="{{ url_for('sua_nhan_vien', id=nv.id) }}">
                         Sửa
                     </a>
+
+                    <form action="{{ url_for('xoa_nhan_vien', id=nv.id) }}"
+                        method="POST"
+                        style="display:inline;"
+                        onsubmit="return confirm('Bạn có chắc muốn xóa nhân viên này không?');">
+
+                        <button type="submit">Xóa</button>
+                    </form>
                 </td>
             </tr>
 
