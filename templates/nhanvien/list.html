@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Danh sach nhan vien</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
     <h1>Danh sach nhan vien</h1>
 
-    <a href="{{ url_for('them_nhan_vien') }}">
-    <button>+ Thêm nhân viên</button>
+    <!-- Nut them nhan vien -->
+    <a href="{{ url_for('nhanvien.them_nhan_vien') }}">
+        <button>+ Thêm nhân viên</button>
     </a>
 
     <table border="1">
+
         <thead>
             <tr>
                 <th>ID</th>
@@ -29,9 +33,8 @@
                 <th>Ngay vao lam</th>
                 <th>Phong ban</th>
                 <th>Chuc vu</th>
+                <th>Thao tac</th>
             </tr>
-
-            <th>Thao tác</th>
         </thead>
 
         <tbody>
@@ -39,6 +42,7 @@
             {% for nv in danh_sach %}
 
             <tr>
+
                 <td>{{ nv.id }}</td>
                 <td>{{ nv.ma_nv }}</td>
                 <td>{{ nv.ho_ten }}</td>
@@ -51,25 +55,36 @@
                 <td>{{ nv.phong_ban }}</td>
                 <td>{{ nv.chuc_vu }}</td>
 
+                <!-- Thao tac -->
                 <td>
-                    <a href="{{ url_for('sua_nhan_vien', id=nv.id) }}">
+
+                    <!-- Sua -->
+                    <a href="{{ url_for('nhanvien.sua_nhan_vien', id=nv.id) }}">
                         Sửa
                     </a>
 
-                    <form action="{{ url_for('xoa_nhan_vien', id=nv.id) }}"
-                        method="POST"
-                        style="display:inline;"
-                        onsubmit="return confirm('Bạn có chắc muốn xóa nhân viên này không?');">
+                    <!-- Xoa -->
+                    <form action="{{ url_for('nhanvien.xoa_nhan_vien', id=nv.id) }}"
+                          method="POST"
+                          style="display:inline;"
+                          onsubmit="return confirm('Bạn có chắc muốn xóa nhân viên này không?');">
 
-                        <button type="submit">Xóa</button>
+                        <button type="submit">
+                            Xóa
+                        </button>
+
                     </form>
+
                 </td>
+
             </tr>
 
             {% endfor %}
 
         </tbody>
+
     </table>
 
 </body>
+
 </html>
