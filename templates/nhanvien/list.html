@@ -13,6 +13,25 @@
 
     <h1>Danh sach nhan vien</h1>
 
+    <form method="GET" action="{{ url_for('nhanvien.danh_sach_nhan_vien') }}">
+
+        <input type="text"
+            name="ma_nv"
+            placeholder="Nhập mã nhân viên"
+            value="{{ tu_khoa }}">
+
+        <button type="submit">
+            Tìm kiếm
+        </button>
+
+        <a href="{{ url_for('nhanvien.danh_sach_nhan_vien') }}">
+            Hiển thị tất cả
+        </a>
+
+    </form>
+
+<br>
+
     <!-- Nut them nhan vien -->
     <a href="{{ url_for('nhanvien.them_nhan_vien') }}">
         <button>+ Thêm nhân viên</button>

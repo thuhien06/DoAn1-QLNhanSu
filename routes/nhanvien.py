@@ -13,13 +13,23 @@ nhanvien_bp = Blueprint("nhanvien", __name__)
 @nhanvien_bp.route("/nhanvien")
 def danh_sach_nhan_vien():
 
-    # Lay tat ca nhan vien trong database
-    danh_sach = NhanVien.query.all()
+     # Lay ma nhan vien tu o tim kiem
+    tu_khoa = request.args.get("ma_nv", "")
 
-    # Truyen danh sach nhan vien sang file list.html
+    # Neu co nhap ma nhan vien
+    if tu_khoa:
+        danh_sach = NhanVien.query.filter(
+            NhanVien.ma_nv.like(f"%{tu_khoa}%")
+        ).all()
+
+    # Neu khong nhap thi hien thi tat ca
+    else:
+        danh_sach = NhanVien.query.all()
+
     return render_template(
         "nhanvien/list.html",
-        danh_sach=danh_sach
+        danh_sach=danh_sach,
+        tu_khoa=tu_khoa
     )
 
 
