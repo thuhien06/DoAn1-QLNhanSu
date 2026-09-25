@@ -121,6 +121,40 @@ def them_nhan_vien():
     # Neu truy cap bang GET thi hien thi form
     return render_template("nhanvien/them.html")
 
+# Sua thong tin nhan vien
+@app.route("/nhanvien/sua/<int:id>", methods=["GET", "POST"])
+def sua_nhan_vien(id):
+
+    # Tim nhan vien theo ID
+    nhan_vien = NhanVien.query.get_or_404(id)
+
+    # Neu nguoi dung bam nut Luu
+    if request.method == "POST":
+
+        # Cap nhat thong tin
+        nhan_vien.ma_nv = request.form["ma_nv"]
+        nhan_vien.ho_ten = request.form["ho_ten"]
+        nhan_vien.ngay_sinh = request.form["ngay_sinh"]
+        nhan_vien.gioi_tinh = request.form["gioi_tinh"]
+        nhan_vien.so_dien_thoai = request.form["so_dien_thoai"]
+        nhan_vien.email = request.form["email"]
+        nhan_vien.dia_chi = request.form["dia_chi"]
+        nhan_vien.ngay_vao_lam = request.form["ngay_vao_lam"]
+        nhan_vien.phong_ban = request.form["phong_ban"]
+        nhan_vien.chuc_vu = request.form["chuc_vu"]
+
+        # Luu thay doi vao MySQL
+        db.session.commit()
+
+        # Quay lai danh sach
+        return redirect(url_for("danh_sach_nhan_vien"))
+
+    # Hien thi form sua
+    return render_template(
+        "nhanvien/sua.html",
+        nhan_vien=nhan_vien
+    )
+
 # Tao cac bang trong database neu chua ton tai
 with app.app_context():
     db.create_all()

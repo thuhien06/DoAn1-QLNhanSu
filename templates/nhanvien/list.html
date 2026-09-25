@@ -30,6 +30,8 @@
                 <th>Phong ban</th>
                 <th>Chuc vu</th>
             </tr>
+
+            <th>Thao tác</th>
         </thead>
 
         <tbody>
@@ -48,6 +50,12 @@
                 <td>{{ nv.ngay_vao_lam }}</td>
                 <td>{{ nv.phong_ban }}</td>
                 <td>{{ nv.chuc_vu }}</td>
+
+                <td>
+                    <a href="{{ url_for('sua_nhan_vien', id=nv.id) }}">
+                        Sửa
+                    </a>
+                </td>
             </tr>
 
             {% endfor %}
