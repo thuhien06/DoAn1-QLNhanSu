@@ -1,5 +1,5 @@
 # Import Flask de tao ung dung web
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 
 # Import load_dotenv de doc thong tin tu file .env
 from dotenv import load_dotenv
@@ -75,6 +75,51 @@ def danh_sach_nhan_vien():
         danh_sach=danh_sach
     )
 
+
+# Hien thi form va xu ly them nhan vien
+@app.route("/nhanvien/them", methods=["GET", "POST"])
+def them_nhan_vien():
+
+    # Neu nguoi dung bam nut Them nhan vien
+    if request.method == "POST":
+
+        # Lay du lieu tu form
+        ma_nv = request.form["ma_nv"]
+        ho_ten = request.form["ho_ten"]
+        ngay_sinh = request.form["ngay_sinh"]
+        gioi_tinh = request.form["gioi_tinh"]
+        so_dien_thoai = request.form["so_dien_thoai"]
+        email = request.form["email"]
+        dia_chi = request.form["dia_chi"]
+        ngay_vao_lam = request.form["ngay_vao_lam"]
+        phong_ban = request.form["phong_ban"]
+        chuc_vu = request.form["chuc_vu"]
+
+        # Tao doi tuong nhan vien moi
+        nhan_vien = NhanVien(
+            ma_nv=ma_nv,
+            ho_ten=ho_ten,
+            ngay_sinh=ngay_sinh,
+            gioi_tinh=gioi_tinh,
+            so_dien_thoai=so_dien_thoai,
+            email=email,
+            dia_chi=dia_chi,
+            ngay_vao_lam=ngay_vao_lam,
+            phong_ban=phong_ban,
+            chuc_vu=chuc_vu
+        )
+
+        # Them nhan vien vao database
+        db.session.add(nhan_vien)
+
+        # Luu thay doi vao MySQL
+        db.session.commit()
+
+        # Them xong thi quay ve danh sach nhan vien
+        return redirect(url_for("danh_sach_nhan_vien"))
+
+    # Neu truy cap bang GET thi hien thi form
+    return render_template("nhanvien/them.html")
 
 # Tao cac bang trong database neu chua ton tai
 with app.app_context():
