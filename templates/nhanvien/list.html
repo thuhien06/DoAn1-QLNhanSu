@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sach nhan vien</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <h1>Danh sach nhan vien</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ma NV</th>
+                <th>Ho ten</th>
+                <th>Ngay sinh</th>
+                <th>Gioi tinh</th>
+                <th>So dien thoai</th>
+                <th>Email</th>
+                <th>Dia chi</th>
+                <th>Ngay vao lam</th>
+                <th>Phong ban</th>
+                <th>Chuc vu</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for nv in danh_sach %}
+
+            <tr>
+                <td>{{ nv.id }}</td>
+                <td>{{ nv.ma_nv }}</td>
+                <td>{{ nv.ho_ten }}</td>
+                <td>{{ nv.ngay_sinh }}</td>
+                <td>{{ nv.gioi_tinh }}</td>
+                <td>{{ nv.so_dien_thoai }}</td>
+                <td>{{ nv.email }}</td>
+                <td>{{ nv.dia_chi }}</td>
+                <td>{{ nv.ngay_vao_lam }}</td>
+                <td>{{ nv.phong_ban }}</td>
+                <td>{{ nv.chuc_vu }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+</body>
+</html>

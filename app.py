@@ -62,6 +62,19 @@ def test_db():
         # Neu ket noi that bai thi hien thi loi
         return f"Loi ket noi MySQL: {e}"
 
+# Hien thi danh sach nhan vien
+@app.route("/nhanvien")
+def danh_sach_nhan_vien():
+
+    # Lay tat ca nhan vien trong database
+    danh_sach = NhanVien.query.all()
+
+    # Truyen danh sach nhan vien sang file list.html
+    return render_template(
+        "nhanvien/list.html",
+        danh_sach=danh_sach
+    )
+
 
 # Tao cac bang trong database neu chua ton tai
 with app.app_context():
